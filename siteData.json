@@ -8,8 +8,8 @@
         "about-us": "About Us",
         "project-team": "Project team",
         "zhan-yang": "Zhan Yang",
+        "teng-xin-zhuan": "Teng Xin Zhuan",
         "chang-ji-xuan": "Chang Ji-xuan",
-        "jean-doe": "Jean Doe",
         "luah-jun-yang": "Luah Jun Yang"
       },
       "headingKeywords": {}
@@ -39,8 +39,8 @@
       "src": "DeveloperGuide.md",
       "title": "Developer Guide",
       "headings": {
-        "ab-3-developer-guide": "AB-3 Developer Guide",
-        "acknowledgements": "Acknowledgements",
+        "insurahub-developer-guide": "Insurahub Developer Guide",
+        "table-of-contents": "Table of contents",
         "setting-up-getting-started": "Setting up, getting started",
         "design": "Design",
         "architecture": "Architecture",
@@ -53,10 +53,12 @@
         "proposed-undo-redo-feature": "[Proposed] Undo/redo feature",
         "proposed-data-archiving": "[Proposed] Data archiving",
         "documentation-logging-testing-configuration-dev-ops": "Documentation, logging, testing, configuration, dev-ops",
+        "acknowledgements": "Acknowledgements",
         "appendix-requirements": "Appendix: Requirements",
         "product-scope": "Product scope",
         "user-stories": "User stories",
         "use-cases": "Use cases",
+        "example-use-case": "Example Use Case",
         "non-functional-requirements": "Non-Functional Requirements",
         "glossary": "Glossary",
         "appendix-instructions-for-manual-testing": "Appendix: Instructions for manual testing",
@@ -106,7 +108,7 @@
       "src": "UserGuide.md",
       "title": "User Guide",
       "headings": {
-        "ab-3-user-guide": "AB-3 User Guide",
+        "insurahub-user-guide": "Insurahub User Guide",
         "quick-start": "Quick start",
         "features": "Features",
         "viewing-help-help": "Viewing help : help",
@@ -119,7 +121,12 @@
         "exiting-the-program-exit": "Exiting the program : exit",
         "saving-the-data": "Saving the data",
         "editing-the-data-file": "Editing the data file",
-        "archiving-data-files-coming-in-v2-0": "Archiving data files [coming in v2.0]",
+        "in-progress": "In Progress",
+        "adding-tags-to-a-client-object-addtag": "Adding tags to a client object: addTag",
+        "deleting-tags-from-a-client-object-deletetag": "Deleting tags from a client object: deleteTag",
+        "highlighting-contact-of-a-client-highlight": "Highlighting contact of a client: highlight",
+        "filtering-for-clients-based-on-tags-filter": "Filtering for clients based on tags: filter",
+        "storing-documents-of-a-client-file": "Storing documents of a client: file",
         "faq": "FAQ",
         "known-issues": "Known issues",
         "command-summary": "Command summary"
@@ -135,6 +142,14 @@
       "headingKeywords": {}
     },
     {
+      "src": "team/aarontxz.md",
+      "title": "aarontxz's Project Portfolio Page",
+      "headings": {
+        "project-insurahub": "Project: Insurahub"
+      },
+      "headingKeywords": {}
+    },
+    {
       "src": "team/johndoe.md",
       "title": "John Doe's Project Portfolio Page",
       "headings": {
@@ -145,6 +160,22 @@
     {
       "src": "team/johnnythesnake12.md",
       "title": "Ji-xuan's Project Portfolio Page\"",
+      "headings": {
+        "project-insurahub": "Project: Insurahub"
+      },
+      "headingKeywords": {}
+    },
+    {
+      "src": "team/luahjunyang.md",
+      "title": "Luah Jun Yang's Project Portfolio Page",
+      "headings": {
+        "project-insurahub": "Project: Insurahub"
+      },
+      "headingKeywords": {}
+    },
+    {
+      "src": "team/zhanyang01.md",
+      "title": "Ng Zhan Yang's Project Portfolio Page",
       "headings": {
         "project-insurahub": "Project: Insurahub"
       },
