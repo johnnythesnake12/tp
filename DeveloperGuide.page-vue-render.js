@@ -257,7 +257,7 @@ with(this){return _c('p',[_v("Return to "),_c('a',{attrs:{"href":"#table-of-cont
 with(this){return _c('h3',{attrs:{"id":"use-cases"}},[_v("Use cases"),_c('a',{staticClass:"fa fa-anchor",attrs:{"href":"#use-cases","onclick":"event.stopPropagation()"}})])}
 },function anonymous(
 ) {
-with(this){return _c('p',[_v("Use Case 1 - Adding more tags to clients records"),_c('br'),_v("\nPrecondition: User already open up the application"),_c('br'),_v("\nMSS:")])}
+with(this){return _c('p',[_v("Use Case 1 - Adding more tags to clients records\nPrecondition: User already open up the application"),_c('br'),_v("\nMSS:")])}
 },function anonymous(
 ) {
 with(this){return _c('ol',[_c('li',[_v("User keys in "),_c('code',{pre:true,attrs:{"class":"hljs inline no-lang"}},[_v("addTag")]),_v(" and the corresponding tags for the particular client identifier or index")]),_v(" "),_c('li',[_v("Systems displays the tags that have been added to the particular client\nUse case ends")])])}
@@ -356,6 +356,6 @@ with(this){return _c('ol',[_c('li',[_c('p',[_v("Dealing with missing/corrupted d
 with(this){return _c('p',[_v("Return to "),_c('a',{attrs:{"href":"#table-of-contents"}},[_v("Table Of Contents")])])}
 },function anonymous(
 ) {
-with(this){return _c('footer',[_c('div',{staticClass:"text-center"},[_c('small',[_v("["),_c('span',[_c('strong',[_v("Powered by")])]),_v(" "),_c('img',{attrs:{"src":"https://markbind.org/favicon.ico","width":"30"}}),_v(" "),_c('a',{attrs:{"href":"https://markbind.org/"}},[_v("MarkBind 5.1.0")]),_v(", generated on Sun, 15 Oct 2023, 17:27:47 GMT+8]")])])])}
+with(this){return _c('footer',[_c('div',{staticClass:"text-center"},[_c('small',[_v("["),_c('span',[_c('strong',[_v("Powered by")])]),_v(" "),_c('img',{attrs:{"src":"https://markbind.org/favicon.ico","width":"30"}}),_v(" "),_c('a',{attrs:{"href":"https://markbind.org/"}},[_v("MarkBind 5.1.0")]),_v(", generated on Tue, 17 Oct 2023, 17:43:42 GMT+8]")])])])}
 }];
   
