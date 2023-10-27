@@ -1,0 +1,43 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+box Logic
+participant ":LogicManager" as LogicManager
+participant ":AddressBookParser" as AddressBookParser
+participant ":FilterCommandParser" as FilterCommandParser
+participant ":FilterCommand" as FilterCommand
+participant ":FilterContainsKeywordsPredicate" as FilterContainsKeywordsPredicate
+end box
+
+autonumber
+[->LogicManager : execute(filter t/Friend)
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand(filter t/Friend)
+activate AddressBookParser
+
+create FilterCommandParser
+AddressBookParser -> FilterCommandParser:
+activate FilterCommandParser
+
+FilterCommandParser --> AddressBookParser
+FilterCommandParser -> FilterCommandParser : Parse
+
+create FilterCommand
+FilterCommandParser -> FilterCommand
+activate FilterCommand
+LogicManager -> FilterCommand : execute()
+deactivate FilterCommandParser
+
+FilterCommand -> Model : updateFilteredPerson(Predicate)
+activate Model
+Model -> Model : getFilteredPersonList()
+Model --> FilterCommand
+deactivate Model
+LogicManager <- FilterCommand: result
+deactivate FilterCommand
+
+box Model
+participant ":Model" as Model
+end box
+@enduml
