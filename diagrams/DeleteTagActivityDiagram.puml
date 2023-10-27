@@ -1,0 +1,32 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User executes DeleteTagCommand;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([user keys in valid command format])
+    :Retrieve client from UniquePersonList;
+    if () then ([client in list])
+
+        if () then([user keys in valid tags])
+            :Delete tags from user's tag list;
+        else ([else])
+            :Display invalid tags error;
+        stop
+        endif
+    else ([else])
+        :Display invalid index error;
+    stop
+    endif
+else ([else])
+    :Display invalid command format error;
+stop
+endif
+:Display success message;
+stop
+@enduml
+

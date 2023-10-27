@@ -11,7 +11,6 @@ Class "<<interface>>\nModel" as Model
 Class AddressBook
 Class ModelManager
 Class UserPrefs
-
 Class UniquePersonList
 Class Person
 Class Address
@@ -19,6 +18,7 @@ Class Email
 Class Name
 Class Phone
 Class Tag
+Class PreferredContact
 
 Class I #FFFFFF
 }
@@ -42,6 +42,7 @@ Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
+Person *--> "1" PreferredContact
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I

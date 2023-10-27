@@ -1,0 +1,73 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":PreferredContactCommandParser" as PreferredContactCommandParser LOGIC_COLOR
+participant "pc:PreferredContactCommand" as PreferredContactCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("preferredContact 1 pc/phone")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("preferredContact 1 pc/phone")
+activate AddressBookParser
+
+create PreferredContactCommandParser
+AddressBookParser -> PreferredContactCommandParser
+activate PreferredContactCommandParser
+
+PreferredContactCommandParser --> AddressBookParser
+deactivate PreferredContactCommandParser
+
+AddressBookParser -> PreferredContactCommandParser : parse("1 pc/phone")
+activate PreferredContactCommandParser
+
+create PreferredContactCommand
+PreferredContactCommandParser -> PreferredContactCommand
+activate PreferredContactCommand
+
+PreferredContactCommand --> PreferredContactCommandParser : pc
+deactivate PreferredContactCommand
+
+PreferredContactCommandParser --> AddressBookParser
+deactivate PreferredContactCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+PreferredContactCommandParser -[hidden]-> AddressBookParser
+destroy PreferredContactCommandParser
+
+AddressBookParser --> LogicManager
+deactivate AddressBookParser
+
+LogicManager -> PreferredContactCommand : execute(model)
+activate PreferredContactCommand
+
+PreferredContactCommand -> Model : setPerson(preferredContactPerson, editedPreferredContactPerson)
+activate Model
+
+Model --> PreferredContactCommand
+
+PreferredContactCommand -> Model : updateFilteredPersonList(list)
+
+Model --> PreferredContactCommand
+
+create CommandResult
+PreferredContactCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> PreferredContactCommand
+deactivate CommandResult
+
+PreferredContactCommand --> LogicManager : result
+deactivate PreferredContactCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
