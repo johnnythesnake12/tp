@@ -7,7 +7,7 @@
       "headings": {
         "about-us": "About Us",
         "project-team": "Project team",
-        "zhan-yang": "Zhan Yang",
+        "ng-zhan-yang": "Ng Zhan Yang",
         "teng-xin-zhuan": "Teng Xin Zhuan",
         "chang-ji-xuan": "Chang Ji-xuan",
         "luah-jun-yang": "Luah Jun Yang"
@@ -39,7 +39,7 @@
       "src": "DeveloperGuide.md",
       "title": "Developer Guide",
       "headings": {
-        "insurahub-developer-guide": "Insurahub Developer Guide",
+        "insurahub-developer-guide": "InsuraHub Developer Guide",
         "table-of-contents": "Table of contents",
         "setting-up-getting-started": "Setting up, getting started",
         "design": "Design",
@@ -51,9 +51,16 @@
         "common-classes": "Common classes",
         "implementation": "Implementation",
         "preferredcontact-feature": "PreferredContact feature",
-        "filtering-by-tag-feature": "Filtering by Tag feature",
+        "addtag-feature": "AddTag feature",
         "deletetag-feature": "DeleteTag feature",
-        "file-feature": "file feature",
+        "filtering-by-tag-feature": "Filtering by Tag feature",
+        "file-feature": "File feature",
+        "groupmeeting-feature": "GroupMeeting feature",
+        "add-policy-feature": "Add Policy feature",
+        "remove-policy-feature": "Remove Policy feature",
+        "view-policy-feature": "View Policy Feature",
+        "filter-policy-description-feature": "Filter Policy Description feature",
+        "toggle-mode-feature": "Toggle Mode feature",
         "proposed-undo-redo-feature": "[Proposed] Undo/redo feature",
         "proposed-data-archiving": "[Proposed] Data archiving",
         "proposed-undo-redo-feature-2": "[Proposed] Undo/redo feature",
@@ -63,13 +70,19 @@
         "product-scope": "Product scope",
         "user-stories": "User stories",
         "use-cases": "Use cases",
-        "example-use-case": "Example Use Case",
         "non-functional-requirements": "Non-Functional Requirements",
         "glossary": "Glossary",
         "appendix-instructions-for-manual-testing": "Appendix: Instructions for manual testing",
         "launch-and-shutdown": "Launch and shutdown",
         "deleting-a-person": "Deleting a person",
-        "saving-data": "Saving data"
+        "saving-data": "Saving data",
+        "appendix-planned-enhancements": "Appendix: Planned Enhancements",
+        "add-feature-email-validation": "Add Feature - Email Validation",
+        "add-feature-phone-number-validation": "Add Feature - Phone Number Validation",
+        "add-policy-feature-invalid-parameter-and-prefix-name": "Add Policy Feature - Invalid parameter and prefix name",
+        "add-policy-feature-special-characters-allowed": "Add Policy Feature - Special characters allowed",
+        "remove-policy-feature-success-message-incorrectly-formatted": "Remove Policy Feature - Success message incorrectly formatted",
+        "preferred-contact-feature-parameters-must-be-lowercase": "Preferred Contact Feature - Parameters must be lowercase"
       },
       "headingKeywords": {}
     },
@@ -111,7 +124,6 @@
     },
     {
       "src": "UserGuide.md",
-      "title": "User Guide",
       "headings": {
         "insurahub-user-guide": "Insurahub User Guide",
         "quick-start": "Quick start",
@@ -146,25 +158,17 @@
     },
     {
       "src": "index.md",
-      "title": "",
+      "title": "Insurahub",
       "headings": {
-        "addressbook-level-3": "AddressBook Level-3"
+        "insurahub": "Insurahub"
       },
       "headingKeywords": {}
     },
     {
       "src": "team/aarontxz.md",
-      "title": "aarontxz's Project Portfolio Page",
+      "title": "Teng Xin Zhuan's Project Portfolio Page",
       "headings": {
         "project-insurahub": "Project: Insurahub"
-      },
-      "headingKeywords": {}
-    },
-    {
-      "src": "team/johndoe.md",
-      "title": "John Doe's Project Portfolio Page",
-      "headings": {
-        "project-addressbook-level-3": "Project: AddressBook Level 3"
       },
       "headingKeywords": {}
     },
@@ -188,6 +192,7 @@
       "src": "team/zhanyang01.md",
       "title": "Ng Zhan Yang's Project Portfolio Page",
       "headings": {
+        "ng-zhan-yang-s-project-portfolio-page": "Ng Zhan Yang's Project Portfolio Page",
         "project-insurahub": "Project: Insurahub"
       },
       "headingKeywords": {}

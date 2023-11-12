@@ -1,0 +1,43 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+box Logic
+participant ":LogicManager" as LogicManager
+participant ":AddressBookParser" as AddressBookParser
+participant ":GroupMeetingCommandParser" as GroupMeetingCommandParser
+participant ":GroupMeetingCommand" as GroupMeetingCommand
+participant ":GroupMeetingContainsKeywordsPredicate" as GroupMeetingContainsKeywordsPredicate
+end box
+
+autonumber
+[->LogicManager : execute(filter t/Friend)
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand(filter t/Friend)
+activate AddressBookParser
+
+create GroupMeetingCommandParser
+AddressBookParser -> GroupMeetingCommandParser:
+activate GroupMeetingCommandParser
+
+GroupMeetingCommandParser --> AddressBookParser
+GroupMeetingCommandParser -> GroupMeetingCommandParser : Parse
+
+create GroupMeetingCommand
+GroupMeetingCommandParser -> GroupMeetingCommand
+activate GroupMeetingCommand
+LogicManager -> GroupMeetingCommand : execute()
+deactivate GroupMeetingCommandParser
+
+GroupMeetingCommand -> Model : updateFilteredPerson(Predicate)
+activate Model
+Model -> Model : getFilteredPersonList()
+Model --> GroupMeetingCommand
+deactivate Model
+LogicManager <- GroupMeetingCommand: result
+deactivate GroupMeetingCommand
+
+box Model
+participant ":Model" as Model
+end box
+@enduml

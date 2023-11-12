@@ -1,0 +1,19 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User executes ViewPolicyCommand;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([user keys in valid command format])
+    :Displays information about policy the user wants to view;
+else ([else])
+    :Display invalid command format error;
+stop
+endif
+:Display success message;
+stop
+@enduml

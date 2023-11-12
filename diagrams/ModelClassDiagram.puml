@@ -19,6 +19,8 @@ Class Name
 Class Phone
 Class Tag
 Class PreferredContact
+Class PreferredMeetingRegion
+Class Policy
 
 Class I #FFFFFF
 }
@@ -43,6 +45,8 @@ Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
 Person *--> "1" PreferredContact
+Person *--> "1" PreferredMeetingRegion
+Person *--> "*" Policy
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I

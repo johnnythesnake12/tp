@@ -1,0 +1,44 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+box Logic
+participant ":LogicManager" as LogicManager
+participant ":AddressBookParser" as AddressBookParser
+participant ":AddTagCommandParser" as AddTagCommandParser
+participant ":AddTagCommand" as AddTagCommand
+participant ":person" as Person
+end box
+
+autonumber
+[->LogicManager : execute(addTag 1 t/Friend)
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand(addTag 1 t/Friend)
+activate AddressBookParser
+
+create AddTagCommandParser
+AddressBookParser -> AddTagCommandParser:
+activate AddTagCommandParser
+
+AddTagCommandParser -> AddTagCommandParser : Parse
+
+create AddTagCommand
+AddTagCommandParser -> AddTagCommand
+activate AddTagCommand
+LogicManager -> AddTagCommand : execute()
+deactivate AddTagCommandParser
+
+create Person
+AddTagCommand -> Person : createPersonWithAddedTag()
+activate Person
+Person -> Person : addTags()
+
+AddTagCommand -> Model : setPerson()
+activate Model
+deactivate Person
+AddTagCommand -> Model : updateFilteredPersonList()
+
+box Model
+participant ":Model" as Model
+end box
+@enduml

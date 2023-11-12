@@ -1,3 +1,4 @@
+@@author LuahJunYang
 @startuml
 'https://plantuml.com/sequence-diagram
 
@@ -6,7 +7,6 @@ participant ":LogicManager" as LogicManager
 participant ":AddressBookParser" as AddressBookParser
 participant ":FilterCommandParser" as FilterCommandParser
 participant ":FilterCommand" as FilterCommand
-participant ":FilterContainsKeywordsPredicate" as FilterContainsKeywordsPredicate
 end box
 
 autonumber

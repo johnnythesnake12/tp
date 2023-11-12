@@ -1,0 +1,77 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ViewPolicyCommandParser" as ViewPolicyCommandParser LOGIC_COLOR
+participant "v:ViewPolicyCommand" as ViewPolicyCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("viewPolicy 1 1")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("viewPolicy 1 1")
+activate AddressBookParser
+
+create ViewPolicyCommandParser
+AddressBookParser -> ViewPolicyCommandParser
+activate ViewPolicyCommandParser
+
+ViewPolicyCommandParser --> AddressBookParser
+deactivate ViewPolicyCommandParser
+
+AddressBookParser -> ViewPolicyCommandParser : parse("1 1")
+activate ViewPolicyCommandParser
+
+create ViewPolicyCommand
+ViewPolicyCommandParser -> ViewPolicyCommand
+activate ViewPolicyCommand
+
+ViewPolicyCommand --> ViewPolicyCommandParser : v
+deactivate ViewPolicyCommand
+
+ViewPolicyCommandParser --> AddressBookParser : v
+deactivate ViewPolicyCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ViewPolicyCommandParser -[hidden]-> AddressBookParser
+destroy ViewPolicyCommandParser
+
+AddressBookParser --> LogicManager : v
+deactivate AddressBookParser
+
+LogicManager -> ViewPolicyCommand : execute(model)
+activate ViewPolicyCommand
+
+ViewPolicyCommand -> Model : get(1)
+activate Model
+
+Model --> ViewPolicyCommand
+deactivate Model
+
+ViewPolicyCommand -> Model : getPolicies()
+activate Model
+
+Model --> ViewPolicyCommand
+deactivate Model
+
+
+create CommandResult
+ViewPolicyCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ViewPolicyCommand
+deactivate CommandResult
+
+ViewPolicyCommand --> LogicManager : result
+deactivate ViewPolicyCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

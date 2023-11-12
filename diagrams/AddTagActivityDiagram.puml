@@ -1,0 +1,29 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User executes AddTagCommand;
+
+if () then ([user keys in valid command format])
+    :Retrieve client from UniquePersonList;
+    if () then ([client in list])
+
+        if () then([user keys in valid tags])
+            :Add tags from user's tag list;
+        else ([else])
+            :Display invalid tags error;
+        stop
+        endif
+    else ([else])
+        :Display invalid index error;
+    stop
+    endif
+else ([else])
+    :Display invalid command format error;
+stop
+endif
+:Display success message;
+stop
+@enduml
