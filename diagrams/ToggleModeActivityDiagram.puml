@@ -1,0 +1,24 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User executes ToggleModeCommand;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([user keys invalid command format])
+    :Retrieve uiMode from uiModeManager;
+    if () then ([uiMode is 'MainWindow.fxml`])
+        :Update uiMode to 'LightWindow.fxml';
+    else ([else])
+        :Update uiMode to 'MainWindow.fxml';
+    endif
+else ([else])
+    :Display unknown command error;
+stop
+endif
+:Display success message;
+stop
+@enduml

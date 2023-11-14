@@ -1,15 +1,20 @@
 @startuml
 'https://plantuml.com/sequence-diagram
+!include style.puml
+skinparam ArrowFontStyle plain
 
-box Logic
-participant ":LogicManager" as LogicManager
-participant ":AddressBookParser" as AddressBookParser
-participant ":AddTagCommandParser" as AddTagCommandParser
-participant ":AddTagCommand" as AddTagCommand
-participant ":person" as Person
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddTagCommandParser" as AddTagCommandParser LOGIC_COLOR
+participant "a :AddTagCommand" as AddTagCommand LOGIC_COLOR
+participant ":person" as Person LOGIC_COLOR
 end box
 
-autonumber
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
 [->LogicManager : execute(addTag 1 t/Friend)
 activate LogicManager
 
@@ -20,13 +25,29 @@ create AddTagCommandParser
 AddressBookParser -> AddTagCommandParser:
 activate AddTagCommandParser
 
-AddTagCommandParser -> AddTagCommandParser : Parse
+AddTagCommandParser --> AddressBookParser
+deactivate AddTagCommandParser
+
+AddressBookParser -> AddTagCommandParser : parse(1 t/Friend)
+activate AddTagCommandParser
 
 create AddTagCommand
 AddTagCommandParser -> AddTagCommand
 activate AddTagCommand
-LogicManager -> AddTagCommand : execute()
+
+AddTagCommand --> AddTagCommandParser: a
+deactivate AddTagCommand
+
+AddTagCommandParser --> AddressBookParser: a
 deactivate AddTagCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar
+AddTagCommandParser -[hidden]-> AddressBookParser
+destroy AddTagCommandParser
+
+AddressBookParser --> LogicManager : a
+deactivate AddressBookParser
+LogicManager -> AddTagCommand : execute()
+activate AddTagCommand
 
 create Person
 AddTagCommand -> Person : createPersonWithAddedTag()
@@ -37,8 +58,4 @@ AddTagCommand -> Model : setPerson()
 activate Model
 deactivate Person
 AddTagCommand -> Model : updateFilteredPersonList()
-
-box Model
-participant ":Model" as Model
-end box
 @enduml

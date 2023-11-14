@@ -1,0 +1,30 @@
+@@author LuahJunYang
+@startuml
+'https://plantuml.com/sequence-diagram
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":ToggleModeCommand" as ToggleModeCommand LOGIC_COLOR
+participant ":uiModeManager" as uiModeManager LOGIC_COLOR
+participant ":uiMode" as uiMode LOGIC_COLOR
+end box
+
+activate ToggleModeCommand
+create uiModeManager
+ToggleModeCommand -> uiModeManager
+activate uiModeManager
+alt [uiMode equals 'MainWindow.fxml']
+    create uiMode
+    uiModeManager -> uiMode : getUiMode()
+    activate uiMode
+    uiMode -> uiMode : equals()
+    alt (uiMode equals 'MainWindow.fxml')
+        uiMode -> uiMode : setUiMode('LightWindow.fxml')
+    else
+        uiMode -> uiMode : setUiMode('MainWindow.fxml')
+    end
+else
+deactivate uiMode
+deactivate ToggleModeCommand
+@enduml

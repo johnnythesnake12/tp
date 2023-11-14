@@ -1,19 +1,23 @@
 @startuml
 'https://plantuml.com/sequence-diagram
+!include style.puml
+skinparam ArrowFontStyle plain
 
-box Logic
-participant ":LogicManager" as LogicManager
-participant ":AddressBookParser" as AddressBookParser
-participant ":GroupMeetingCommandParser" as GroupMeetingCommandParser
-participant ":GroupMeetingCommand" as GroupMeetingCommand
-participant ":GroupMeetingContainsKeywordsPredicate" as GroupMeetingContainsKeywordsPredicate
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":GroupMeetingCommandParser" as GroupMeetingCommandParser LOGIC_COLOR
+participant "g :GroupMeetingCommand" as GroupMeetingCommand LOGIC_COLOR
 end box
 
-autonumber
-[->LogicManager : execute(filter t/Friend)
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[->LogicManager : execute(groupmeeting west)
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand(filter t/Friend)
+LogicManager -> AddressBookParser : parseCommand(groupmeeting west)
 activate AddressBookParser
 
 create GroupMeetingCommandParser
@@ -21,13 +25,28 @@ AddressBookParser -> GroupMeetingCommandParser:
 activate GroupMeetingCommandParser
 
 GroupMeetingCommandParser --> AddressBookParser
-GroupMeetingCommandParser -> GroupMeetingCommandParser : Parse
+deactivate GroupMeetingCommandParser
+
+AddressBookParser -> GroupMeetingCommandParser : parse(west)
+activate GroupMeetingCommandParser
 
 create GroupMeetingCommand
 GroupMeetingCommandParser -> GroupMeetingCommand
 activate GroupMeetingCommand
-LogicManager -> GroupMeetingCommand : execute()
+
+GroupMeetingCommand --> GroupMeetingCommandParser: g
+deactivate GroupMeetingCommand
+
+GroupMeetingCommandParser --> AddressBookParser: g
 deactivate GroupMeetingCommandParser
+'Hidden arrow to position the destroy marker below the activation bar'
+GroupMeetingCommandParser -[hidden]-> AddressBookParser
+destroy GroupMeetingCommandParser
+
+AddressBookParser --> LogicManager: g
+deactivate AddressBookParser
+LogicManager -> GroupMeetingCommand : execute()
+activate GroupMeetingCommand
 
 GroupMeetingCommand -> Model : updateFilteredPerson(Predicate)
 activate Model
@@ -37,7 +56,4 @@ deactivate Model
 LogicManager <- GroupMeetingCommand: result
 deactivate GroupMeetingCommand
 
-box Model
-participant ":Model" as Model
-end box
 @enduml

@@ -1,0 +1,63 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":DeleteTagCommandParser" as DeleteTagCommandParser LOGIC_COLOR
+participant "d :DeleteTagCommand" as DeleteTagCommand LOGIC_COLOR
+participant ":person" as Person LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[->LogicManager : execute(deleteTag 1 t/Friend)
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand(deleteTag 1 t/Friend)
+activate AddressBookParser
+
+create DeleteTagCommandParser
+AddressBookParser -> DeleteTagCommandParser:
+activate DeleteTagCommandParser
+
+DeleteTagCommandParser -> AddressBookParser
+deactivate DeleteTagCommandParser
+
+AddressBookParser -> DeleteTagCommandParser : parse(1 t/Friend)
+activate DeleteTagCommandParser
+
+create DeleteTagCommand
+DeleteTagCommandParser -> DeleteTagCommand
+activate DeleteTagCommand
+
+DeleteTagCommand --> DeleteTagCommandParser : d
+deactivate DeleteTagCommand
+
+DeleteTagCommandParser --> AddressBookParser: d
+deactivate DeleteTagCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar'
+DeleteTagCommandParser -[hidden]-> AddressBookParser
+destroy DeleteTagCommandParser
+
+AddressBookParser -> LogicManager : d
+deactivate AddressBookParser
+
+LogicManager -> DeleteTagCommand : execute()
+activate DeleteTagCommand
+
+create Person
+DeleteTagCommand -> Person : createPersonWithDeletedTag()
+activate Person
+Person -> Person : deleteTags()
+
+DeleteTagCommand -> Model : setPerson()
+activate Model
+deactivate Person
+DeleteTagCommand -> Model : updateFilteredPersonList()
+
+@enduml

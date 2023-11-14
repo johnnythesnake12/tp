@@ -1,0 +1,62 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":RemovePolicyCommandParser" as RemovePolicyCommandParser LOGIC_COLOR
+participant "r :RemovePolicyCommand" as RemovePolicyCommand LOGIC_COLOR
+participant ":person" as Person LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[->LogicManager : execute(removePolicy 1 1)
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand(removePolicy 1 1)
+activate AddressBookParser
+
+create RemovePolicyCommandParser
+AddressBookParser -> RemovePolicyCommandParser:
+activate RemovePolicyCommandParser
+
+RemovePolicyCommandParser --> AddressBookParser
+deactivate RemovePolicyCommandParser
+
+AddressBookParser -> RemovePolicyCommandParser : parse(1 1)
+activate RemovePolicyCommandParser
+
+create RemovePolicyCommand
+RemovePolicyCommandParser -> RemovePolicyCommand
+activate RemovePolicyCommand
+
+RemovePolicyCommand --> RemovePolicyCommandParser: r
+deactivate RemovePolicyCommand
+
+RemovePolicyCommandParser --> AddressBookParser: r
+deactivate RemovePolicyCommandParser
+'Hidden arrow to position the destroy marker'
+RemovePolicyCommandParser -[hidden]-> AddressBookParser
+destroy RemovePolicyCommandParser
+
+AddressBookParser -> LogicManager : r
+deactivate AddressBookParser
+
+LogicManager -> RemovePolicyCommand : execute()
+activate RemovePolicyCommand
+
+create Person
+RemovePolicyCommand -> Person :
+activate Person
+Person -> Person : removePolicy()
+
+RemovePolicyCommand -> Model : setPerson()
+deactivate Person
+activate Model
+RemovePolicyCommand -> Model : updateFilteredPersonList()
+
+@enduml

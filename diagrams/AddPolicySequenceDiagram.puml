@@ -1,0 +1,61 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddPolicyCommandParser" as AddPolicyCommandParser LOGIC_COLOR
+participant "a :AddPolicyCommand" as AddPolicyCommand LOGIC_COLOR
+participant ":person" as Person LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[->LogicManager : execute(addPolicy 1 pn/Health Insurance pd/Cancer...)
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand(addPolicy 1 pn/Health Insurance pd/Cancer...)
+activate AddressBookParser
+
+create AddPolicyCommandParser
+AddressBookParser -> AddPolicyCommandParser:
+activate AddPolicyCommandParser
+
+AddPolicyCommandParser --> AddressBookParser
+deactivate AddPolicyCommandParser
+
+AddressBookParser -> AddPolicyCommandParser : parse(1 pn/Health Insurance pd/Cancer...)
+activate AddPolicyCommandParser
+
+create AddPolicyCommand
+AddPolicyCommandParser -> AddPolicyCommand
+activate AddPolicyCommand
+AddPolicyCommand --> AddPolicyCommandParser: a
+deactivate AddPolicyCommand
+
+AddPolicyCommandParser --> AddressBookParser : a
+deactivate AddPolicyCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar'
+ViewPolicyCommandParser -[hidden]-> AddressBookParser
+destroy AddPolicyCommandParser
+
+AddressBookParser --> LogicManager : a
+deactivate AddressBookParser
+
+LogicManager -> AddPolicyCommand : execute()
+activate AddPolicyCommand
+
+create Person
+AddPolicyCommand -> Person : createPersonWithAddedPolicy()
+activate Person
+Person -> Person : addPolicies()
+
+AddPolicyCommand -> Model : setPerson()
+activate Model
+deactivate Person
+AddPolicyCommand -> Model : updateFilteredPersonList()
+@enduml

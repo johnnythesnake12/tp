@@ -1,0 +1,36 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User executes FileCommand;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([user keys in valid command format])
+    :Retrieve client from UniquePersonList;
+    if () then ([client in list])
+        if () then([clientFiles folder not in data folder])
+            :create empty clientFile folder in the data folder;
+        else ([else])
+        endif
+
+        if () then([client folder exist in cleintFile folder])
+            :open client's folder;
+        else ([else])
+            :create and open client's folder in ClientFile;
+        endif
+    else ([else])
+        :Display invalid index error;
+    stop
+    endif
+else ([else])
+    :Display invalid command format error;
+stop
+endif
+:Display success message;
+stop
+
+@enduml
+
